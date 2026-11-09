@@ -1,4 +1,4 @@
-# source code for who_joined. this bot exists because of you Bianca.
+# Source code for who_joined. this bot exists because of you Bianca.
 
 # importing stuff
 import discord
@@ -26,13 +26,13 @@ bot.event(starting_bot)
 # Runs when somebody's voice status changes.
 async def member_status(member, before, after):
 
-    # Detect join or a member leaving or whatever's happening
+    # Detects join or a member leaving or whatever's happening
     if before.channel is None and after.channel is not None:
         
-        # Timestamping the detection
+        # Timestamping 
         timestamp = datetime.now().strftime("%H:%M:%S %Y-%m-%d")
 
-        # Prints to terminal (For redirection)
+        # Prints to terminal (for redirection)
         print( f"[{timestamp}] " f"{member.name} joined " 
               f"{after.channel.name}")
 
@@ -46,7 +46,6 @@ bot.event(member_status)
 bot.run(TOKEN)
 
 
-
-
+# wip
 
 
