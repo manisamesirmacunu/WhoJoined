@@ -27,7 +27,7 @@ bot = commands.Bot(intents=intents, command_prefix="!")
 
 # What the bot doin?
 @bot.event
-async def starting_bot():
+async def on_ready():
     print("Spying...")
     
     channel = bot.get_channel(CHANNEL_ID)
@@ -35,41 +35,34 @@ async def starting_bot():
     if channel:
         await channel.send("Spying...")
 
-
-
 # Runs when somebody's voice status changes.
 @bot.event
 async def on_voice_state_update(member, before, after):
 
+    # Timestamping 
+    timestamp = datetime.now().strftime("%H:%M:%S %Y-%m-%d")
+
+    channel = bot.get_channel(CHANNEL_ID)
+
     # Detects join
     if before.channel is None and after.channel is not None:
-        
-        # Timestamping 
-        timestamp = datetime.now().strftime("%H:%M:%S %Y-%m-%d")
 
-        # Prints to terminal (for redirection)
-        print( f"[{timestamp}] " f"{member.name} joined " 
-              f"{after.channel.name}")
+        if channel: await channel.send(f"{member.display_name} joined {after.channel.name} - {timestamp}\n")
 
-  # Detects leaving
-    if before.channel is not None and after.channel is None:
+  # Detects leave
+    elif before.channel is not None and after.channel is None:
 
-                # Prints to terminal (for redirection)
-        print( f"[{timestamp}] " f"{member.name} left " 
-              f"{after.channel.name}")
+        if channel: await channel.send(f"{member.display_name} left {before.channel.name} - {timestamp}\n")
 
-        # Redirects to a file / logs entry
-        with open("who_joined_vc.txt", "a", encoding="utf-8") as log:
-            log.write(f"[{timestamp}] {member.name} joined {after.channel.name}\n")
-
-        channel = bot.get_channel(CHANNEL_ID)
-
-        if channel: await channel.send(f"{member.display_name} joined {after.channel.name} - {timestamp}")
+    # member switched voice chats
+    
+    elif before.channel != after.channel:
             
+        if channel: await channel.send(f"{member.display_name} left {before.channel.name} - {timestamp}\n")
+
 
 # Starts bot
 bot.run(TOKEN)
-
 
 # wip
 
