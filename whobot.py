@@ -58,7 +58,7 @@ async def on_voice_state_update(member, before, after):
     
     elif before.channel != after.channel:
             
-        if channel: await channel.send(f"{member.display_name} left {before.channel.name} - {timestamp}\n")
+        if channel: await channel.send(f"{member.display_name} moved from {before.channel.name} to {after.channel.name} - {timestamp}\n")
 
 
 # Starts bot
