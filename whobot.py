@@ -20,7 +20,7 @@ intents.members = True
 intents.message_content = True
 
 # Wait... here's the bot. oops
-bot = commands.Bot(intents=intents, start_with="!")
+bot = commands.Bot(intents=intents, command_prefix="!")
 
 # What the bot doin?
 async def starting_bot():
