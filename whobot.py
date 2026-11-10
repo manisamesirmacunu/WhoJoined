@@ -64,6 +64,4 @@ async def on_voice_state_update(member, before, after):
 # Starts bot
 bot.run(TOKEN)
 
-# wip
-
 
