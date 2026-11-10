@@ -29,12 +29,19 @@ bot = commands.Bot(intents=intents, command_prefix="!")
 @bot.event
 async def starting_bot():
     print("Spying...")
+    
+    channel = bot.get_channel(CHANNEL_ID)
+
+    if channel:
+        await channel.send("Spying...")
+
+
 
 # Runs when somebody's voice status changes.
 @bot.event
 async def on_voice_state_update(member, before, after):
 
-    # Detects join or a member leaving or whatever's happening
+    # Detects join
     if before.channel is None and after.channel is not None:
         
         # Timestamping 
@@ -44,13 +51,20 @@ async def on_voice_state_update(member, before, after):
         print( f"[{timestamp}] " f"{member.name} joined " 
               f"{after.channel.name}")
 
+  # Detects leaving
+    if before.channel is not None and after.channel is None:
+
+                # Prints to terminal (for redirection)
+        print( f"[{timestamp}] " f"{member.name} left " 
+              f"{after.channel.name}")
+
         # Redirects to a file / logs entry
         with open("who_joined_vc.txt", "a", encoding="utf-8") as log:
-            log.write(f"[{timestamp}] {member.name} joined {after.channel.name} - {timestamp}\n")
+            log.write(f"[{timestamp}] {member.name} joined {after.channel.name}\n")
 
         channel = bot.get_channel(CHANNEL_ID)
 
-        if channel: await channel.send(f"{member.display_name} joined {after.channel.name}")
+        if channel: await channel.send(f"{member.display_name} joined {after.channel.name} - {timestamp}")
             
 
 # Starts bot
