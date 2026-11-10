@@ -46,7 +46,7 @@ async def on_voice_state_update(member, before, after):
 
         # Redirects to a file / logs entry
         with open("who_joined_vc.txt", "a", encoding="utf-8") as log:
-            log.write(f"[{timestamp}] {member.name} joined {after.channel.name}\n")
+            log.write(f"[{timestamp}] {member.name} joined {after.channel.name} - {timestamp}\n")
 
         channel = bot.get_channel(CHANNEL_ID)
 
