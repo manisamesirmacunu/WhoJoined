@@ -40,7 +40,7 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
 
     # Timestamping 
-    timestamp = datetime.now().strftime("%H:%M:%S %d-%m-%Y")
+    timestamp = datetime.now().strftime("%H:%M:%S %d.%m.%Y")
 
     channel = bot.get_channel(CHANNEL_ID)
 
