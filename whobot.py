@@ -13,6 +13,9 @@ load_dotenv()
 # Read and storing the token (in .env)
 TOKEN = os.getenv("DISCORD_TOKEN")
 
+# Redirecting it to a specific channel
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
+
 # Bot perms
 intents = discord.Intents.default()
 intents.voice_states = True
