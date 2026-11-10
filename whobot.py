@@ -17,6 +17,10 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents.default()
 intents.voice_states = True
 intents.members = True
+intents.message_content = True
+
+# Wait... here's the bot. oops
+bot = commands.Bot(intents=intents, start_with="!")
 
 # What the bot doin?
 async def starting_bot():
